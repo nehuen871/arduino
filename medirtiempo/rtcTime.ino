@@ -1,3 +1,4 @@
+//https://www.youtube.com/watch?v=ZOMXEYuQwwY
 // https://github.com/bitwiseAr/Curso-Arduino-desde-cero/
 
 #include <Wire.h>    // incluye libreria para interfaz I2C
