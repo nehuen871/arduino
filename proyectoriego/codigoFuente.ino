@@ -8,6 +8,13 @@ void setup()
 }
 void loop()
 {
+  digitalWrite (1, LOW);/*luz BLANCA*/
+  digitalWrite (6, LOW);/*Ventilador led BLANCA*/
+  digitalWrite (2, LOW);/*luz VIOLETA*/
+  digitalWrite (5, LOW);/*Ventilador led VIOLETA*/
+  digitalWrite (7, LOW);/*luz AMARILLA*/
+  digitalWrite (4, LOW);/*Ventilador led AMARILLA*/
+  digitalWrite (3, LOW);/*Extractor*/
   Serial.print("A0 La humedad es del ");
   Serial.println(analogRead(0));
   Serial.print("A1 La humedad es del ");
