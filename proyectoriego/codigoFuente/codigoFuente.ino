@@ -33,3 +33,11 @@ int cerraValvulaDeAgua() {
   digitalWrite (3, LOW);
   return 0;
 }
+
+int prenderLed(){
+  digitalWrite (3, HIGH);
+}
+
+int apagarLed(){
+  digitalWrite (3, LOW);
+}

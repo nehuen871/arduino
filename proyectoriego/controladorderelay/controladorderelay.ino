@@ -2,17 +2,21 @@
 int switchState = 0;
 int switchState2 = 0;
 void setup() {
-  // put your setup code here, to run once:
-    pinMode(2, INPUT);
+    pinMode(1, OUTPUT);
+    pinMode(2, OUTPUT);
     pinMode(3, OUTPUT);
+    pinMode(4, OUTPUT);
+    pinMode(5, OUTPUT);
+    pinMode(6, OUTPUT);
+    pinMode(7, OUTPUT);
 }
 
 void loop() {
-  switchState = digitalRead(2);
-  if (switchState == HIGH) {
-    digitalWrite (3, LOW);
-  }else{
-    digitalWrite (3, HIGH);
-  } 
-  
+  digitalWrite (1, LOW);
+  digitalWrite (2, LOW);
+  digitalWrite (3, LOW);
+  digitalWrite (4, LOW);
+  digitalWrite (5, LOW);
+  digitalWrite (6, LOW);
+  digitalWrite (7, LOW);
 }
