@@ -17,14 +17,16 @@ void setup() {
     pinMode(11, OUTPUT);
     pinMode(12, OUTPUT);
     pinMode(13, OUTPUT);
-    if (! rtc.begin()) {       // si falla la inicializacion del modulo
-      while (1);         // bucle infinito que detiene ejecucion del programa
-    }
+    //Serial.begin(9600);    // inicializa comunicacion serie a 9600 bps PARA TIEMPO
+    //Serial.begin(115200);/*Para medir humedad*/
 }
 
 void loop() {
   DateTime fecha = rtc.now();
   if(fecha.hour() >= 00 && fecha.hour() <= 12){
+    /*Serial.print(fecha.hour());      // funcion que obtiene la hora de la fecha completa
+    Serial.print(":");       // caracter dos puntos como separador
+    Serial.println(fecha.minute());*/      // funcion que obtiene los minutos de la fecha completa
     prenderLedAmarilla(1);
     prenderExtractor(1);
     prenderLedVioleta(1);
@@ -46,6 +48,13 @@ void loop() {
 
   int lecturaA1 = analogRead(A1);/* MEDIDOR BAJO*/
   int lecturaPorcentajeA1 = map(lecturaA1,1023,0,0,100);
+
+  /*Serial.print("A0 La humedad es del ");
+  Serial.println(lecturaPorcentajeA0);
+  Serial.print("A1 La humedad es del ");
+  Serial.println(lecturaPorcentajeA1);
+  Serial.print("A2 La humedad es del ");
+  Serial.println(lecturaPorcentajeA2);*/
 }
 
 int prenderExtractor(int prender){
