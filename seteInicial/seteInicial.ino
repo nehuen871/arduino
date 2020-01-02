@@ -1,3 +1,6 @@
+#include <Wire.h>    // incluye libreria para interfaz I2C
+#include <RTClib.h>   // incluye libreria para el manejo del modulo RTC
+RTC_DS3231 rtc;     // crea objeto del tipo RTC_DS3231
 /*Para el relay primera pata positivo segunda va al arduino y tercera al negativo, la referencia es (- + s)*/
 void setup() {
     pinMode(0, OUTPUT);
@@ -14,25 +17,22 @@ void setup() {
     pinMode(11, OUTPUT);
     pinMode(12, OUTPUT);
     pinMode(13, OUTPUT);
+    if (! rtc.begin()) {       // si falla la inicializacion del modulo
+      while (1);         // bucle infinito que detiene ejecucion del programa
+    }
 }
 
 void loop() {
+  DateTime fecha = rtc.now();
+  if(fecha.hour() >= 00 && fecha.hour() <= 12){
+    prenderLedAmarilla(1);
+    prenderExtractor(1);
+    prenderLedVioleta(1);
+    prenderLedBlanca(1);
+  }
   digitalWrite (0, LOW);/*NADA*/
   digitalWrite (13, LOW);/*NADA*/
-  digitalWrite (1, HIGH);/*luz AMARILLA*/
-  digitalWrite (6, HIGH);/*Ventilador led AMARILLA*/
-  digitalWrite (2, HIGH);/*luz VIOLETA*/
-  digitalWrite (8, HIGH);/*Ventilador led VIOLETA*/
-  digitalWrite (7, HIGH);/*luz BLANCA*/
-  digitalWrite (4, HIGH);/*Ventilador led BLANCA*/
-  
-  
   digitalWrite (5, LOW);/*vALVULA INTERIOR*/
-
-  
-  digitalWrite (3, HIGH);/*Extractor*/
-
-  
   digitalWrite (9,  LOW);/*vALVULA A*/
   digitalWrite (10, LOW);/*vALVULA B*/
   digitalWrite (11, LOW);/*vALVULA C*/
@@ -47,4 +47,41 @@ void loop() {
   int lecturaA1 = analogRead(A1);/* MEDIDOR BAJO*/
   int lecturaPorcentajeA1 = map(lecturaA1,1023,0,0,100);
 }
-  
+
+int prenderExtractor(int prender){
+  if(prender == 1){
+    digitalWrite (3, HIGH);/*Extractor*/
+  }else{
+    digitalWrite (3, LOW);/*Extractor*/
+  }
+}
+
+int prenderLedAmarilla(int prender){
+  if(prender == 1){
+    digitalWrite (1, HIGH);/*luz AMARILLA*/
+    digitalWrite (6, HIGH);/*Ventilador led AMARILLA*/
+  }else{
+    digitalWrite (1, LOW);/*luz AMARILLA*/
+    digitalWrite (6, LOW);/*Ventilador led AMARILLA*/
+  }
+}
+
+int prenderLedVioleta(int prender){
+  if(prender == 1){
+    digitalWrite (2, HIGH);/*luz VIOLETA*/
+    digitalWrite (8, HIGH);/*Ventilador led VIOLETA*/
+  }else{
+    digitalWrite (2, LOW);/*luz VIOLETA*/
+    digitalWrite (8, LOW);/*Ventilador led VIOLETA*/
+  }
+}
+
+int prenderLedBlanca(int prender){
+  if(prender == 1){
+    digitalWrite (7, HIGH);/*luz BLANCA*/
+    digitalWrite (4, HIGH);/*Ventilador led BLANCA*/
+  }else{
+    digitalWrite (7, LOW);/*luz BLANCA*/
+    digitalWrite (4, LOW);/*Ventilador led BLANCA*/
+  }
+}
