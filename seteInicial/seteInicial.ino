@@ -34,11 +34,7 @@ void loop() {
   }
   digitalWrite (0, LOW);/*NADA*/
   digitalWrite (13, LOW);/*NADA*/
-  digitalWrite (5, LOW);/*vALVULA INTERIOR*/
-  digitalWrite (9,  LOW);/*vALVULA A*/
-  digitalWrite (10, LOW);/*vALVULA B*/
-  digitalWrite (11, LOW);/*vALVULA C*/
-  digitalWrite (12, LOW);/*vALVULA D*/
+
 
   int lecturaA0 = analogRead(A0);/* MEDIDOR MEDIO*/
   int lecturaPorcentajeA0 = map(lecturaA0,1023,0,0,100);
@@ -92,5 +88,41 @@ int prenderLedBlanca(int prender){
   }else{
     digitalWrite (7, LOW);/*luz BLANCA*/
     digitalWrite (4, LOW);/*Ventilador led BLANCA*/
+  }
+}
+
+int prenderValvulaA(int prender){
+   if(prender == 1){
+    digitalWrite (9,  HIGH);/*vALVULA A*/
+   }else{
+    digitalWrite (9,  LOW);/*vALVULA A*/
+   }
+}
+int prenderValvulaB(int prender){
+  if(prender == 1){
+    digitalWrite (10, HIGH);/*vALVULA B*/
+  }else{
+    digitalWrite (10, LOW);/*vALVULA B*/
+  }
+}
+int prenderValvulaC(int prender){
+  if(prender == 1){
+    digitalWrite (11, HIGH);/*vALVULA C*/
+  }else{
+    digitalWrite (11, LOW);/*vALVULA C*/
+  }
+}
+int prenderValvulaD(int prender){
+  if(prender == 1){
+    digitalWrite (12, HIGH);/*vALVULA D*/
+  }else{
+    digitalWrite (12, LOW);/*vALVULA D*/
+  }
+}
+int prenderValvulaInterior(int prender){
+  if(prender == 1){
+    digitalWrite (5, HIGH);/*vALVULA INTERIOR*/
+  }else{
+    digitalWrite (5, LOW);/*vALVULA INTERIOR*/
   }
 }
