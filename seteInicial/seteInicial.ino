@@ -1,4 +1,3 @@
-#include <Wire.h>    // incluye libreria para interfaz I2C
 #include <RTClib.h>   // incluye libreria para el manejo del modulo RTC
 RTC_DS3231 rtc;     // crea objeto del tipo RTC_DS3231
 /*Para el relay primera pata positivo segunda va al arduino y tercera al negativo, la referencia es (- + s)*/
@@ -23,7 +22,8 @@ void setup() {
 
 void loop() {
   DateTime fecha = rtc.now();
-  if(fecha.hour() >= 00 && fecha.hour() <= 12){
+  int hora = fecha.hour();
+  if(hora >= 0 && hora <= 12){
     /*Serial.print(fecha.hour());      // funcion que obtiene la hora de la fecha completa
     Serial.print(":");       // caracter dos puntos como separador
     Serial.println(fecha.minute());*/      // funcion que obtiene los minutos de la fecha completa
