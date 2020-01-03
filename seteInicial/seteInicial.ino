@@ -124,6 +124,7 @@ int prenderValvulaInterior(int prender){
     digitalWrite (5, LOW);/*vALVULA INTERIOR*/
   }
 }
+/*funcion para loger el tiempo en la consula*/
 int logTiempo(){
   DateTime fecha = rtc.now();
   Serial.print(fecha.hour());      // funcion que obtiene la hora de la fecha completa
