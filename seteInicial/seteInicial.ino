@@ -23,10 +23,8 @@ void setup() {
 void loop() {
   DateTime fecha = rtc.now();
   int hora = fecha.hour();
+  logTiempo();
   if(hora >= 0 && hora <= 12){
-    /*Serial.print(fecha.hour());      // funcion que obtiene la hora de la fecha completa
-    Serial.print(":");       // caracter dos puntos como separador
-    Serial.println(fecha.minute());*/      // funcion que obtiene los minutos de la fecha completa
     prenderLedAmarilla(1);
     prenderExtractor(1);
     prenderLedVioleta(1);
@@ -125,4 +123,10 @@ int prenderValvulaInterior(int prender){
   }else{
     digitalWrite (5, LOW);/*vALVULA INTERIOR*/
   }
+}
+int logTiempo(){
+  DateTime fecha = rtc.now();
+  Serial.print(fecha.hour());      // funcion que obtiene la hora de la fecha completa
+  Serial.print(":");       // caracter dos puntos como separador
+  Serial.println(fecha.minute());      // funcion que obtiene los minutos de la fecha completa
 }
