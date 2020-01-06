@@ -17,18 +17,28 @@ void setup() {
     pinMode(12, OUTPUT);
     pinMode(13, OUTPUT);
     //Serial.begin(9600);    // inicializa comunicacion serie a 9600 bps PARA TIEMPO
+     if (! rtc.begin()) {       // si falla la inicializacion del modulo
+     while (1);         // bucle infinito que detiene ejecucion del programa
+     }
+     //rtc.adjust(DateTime(__DATE__, __TIME__));
     //Serial.begin(115200);/*Para medir humedad*/
 }
 
 void loop() {
+  delay(1000);
   DateTime fecha = rtc.now();
   int hora = fecha.hour();
-  logTiempo();
-  if(hora >= 0 && hora <= 12){
+  //logTiempo();
+  if(hora > 8 && hora < 20){
     prenderLedAmarilla(1);
     prenderExtractor(1);
     prenderLedVioleta(1);
     prenderLedBlanca(1);
+  }else{
+    prenderLedAmarilla(0);
+    prenderExtractor(0);
+    prenderLedVioleta(0);
+    prenderLedBlanca(0);
   }
   digitalWrite (0, LOW);/*NADA*/
   digitalWrite (13, LOW);/*NADA*/
@@ -43,6 +53,12 @@ void loop() {
   int lecturaA1 = analogRead(A1);/* MEDIDOR BAJO*/
   int lecturaPorcentajeA1 = map(lecturaA1,1023,0,0,100);
 
+
+  if(lecturaPorcentajeA0 > 60){
+    prenderValvulaInterior(1);
+  }else{
+     prenderValvulaInterior(0);
+  }
   /*Serial.print("A0 La humedad es del ");
   Serial.println(lecturaPorcentajeA0);
   Serial.print("A1 La humedad es del ");
@@ -130,4 +146,5 @@ int logTiempo(){
   Serial.print(fecha.hour());      // funcion que obtiene la hora de la fecha completa
   Serial.print(":");       // caracter dos puntos como separador
   Serial.println(fecha.minute());      // funcion que obtiene los minutos de la fecha completa
+  delay(1000);
 }
