@@ -29,7 +29,7 @@ void loop() {
   DateTime fecha = rtc.now();
   int hora = fecha.hour();
   //logTiempo();
-  if(hora > 8 && hora < 20){
+  if(hora > 7 && hora < 20){
     prenderLedAmarilla(1);
     prenderExtractor(1);
     prenderLedVioleta(1);
@@ -54,7 +54,7 @@ void loop() {
   int lecturaPorcentajeA1 = map(lecturaA1,1023,0,0,100);
 
 
-  if(lecturaPorcentajeA0 > 60){
+  if(lecturaPorcentajeA0 > 60 && lecturaPorcentajeA1 > 60 && lecturaPorcentajeA2 > 60){
     prenderValvulaInterior(1);
   }else{
      prenderValvulaInterior(0);
