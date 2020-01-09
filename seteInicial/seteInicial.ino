@@ -20,7 +20,7 @@ void setup() {
      if (! rtc.begin()) {       // si falla la inicializacion del modulo
      while (1);         // bucle infinito que detiene ejecucion del programa
      }
-     //rtc.adjust(DateTime(__DATE__, __TIME__));
+    //rtc.adjust(DateTime(__DATE__, __TIME__));
     //Serial.begin(115200);/*Para medir humedad*/
 }
 
@@ -44,27 +44,23 @@ void loop() {
   digitalWrite (13, LOW);/*NADA*/
 
 
-  int lecturaA0 = analogRead(A0);/* MEDIDOR MEDIO*/
+  int lecturaA0 = analogRead(A0);/* MEDIDOR BAJO*/
   int lecturaPorcentajeA0 = map(lecturaA0,1023,0,0,100);
+
+  int lecturaA1 = analogRead(A1);/* MEDIDOR MEDIO*/
+  int lecturaPorcentajeA1 = map(lecturaA1,1023,0,0,100);
 
   int lecturaA2 = analogRead(A2);/* MEDIDOR ALTO*/
   int lecturaPorcentajeA2 = map(lecturaA2,1023,0,0,100);
 
-  int lecturaA1 = analogRead(A1);/* MEDIDOR BAJO*/
-  int lecturaPorcentajeA1 = map(lecturaA1,1023,0,0,100);
 
-
-  if(lecturaPorcentajeA0 > 60 && lecturaPorcentajeA1 > 60 && lecturaPorcentajeA2 > 60){
+  if(lecturaPorcentajeA0 < 50 && lecturaPorcentajeA1 < 50 && lecturaPorcentajeA2 < 50 ){
+    delay(2000);
     prenderValvulaInterior(1);
   }else{
      prenderValvulaInterior(0);
   }
-  /*Serial.print("A0 La humedad es del ");
-  Serial.println(lecturaPorcentajeA0);
-  Serial.print("A1 La humedad es del ");
-  Serial.println(lecturaPorcentajeA1);
-  Serial.print("A2 La humedad es del ");
-  Serial.println(lecturaPorcentajeA2);*/
+  //logHumedad(lecturaPorcentajeA0,lecturaPorcentajeA1,lecturaPorcentajeA2);
 }
 
 int prenderExtractor(int prender){
@@ -147,4 +143,13 @@ int logTiempo(){
   Serial.print(":");       // caracter dos puntos como separador
   Serial.println(fecha.minute());      // funcion que obtiene los minutos de la fecha completa
   delay(1000);
+}
+
+int logHumedad(int lecturaPorcentajeA0, int lecturaPorcentajeA1, int lecturaPorcentajeA2){
+  Serial.print("A0 La humedad es del ");
+  Serial.println(lecturaPorcentajeA0);
+  Serial.print("A1 La humedad es del ");
+  Serial.println(lecturaPorcentajeA1);
+  Serial.print("A2 La humedad es del ");
+  Serial.println(lecturaPorcentajeA2);
 }
